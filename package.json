@@ -1,0 +1,47 @@
+{
+	"name": "@webacad/ng-mat-file-upload",
+	"description": "File input for angular material",
+	"version": "0.0.1",
+	"keywords": [
+		"angular",
+		"forms",
+		"material",
+		"input",
+		"file"
+	],
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:Web-ACAD/ng-mat-file-upload.git"
+	},
+	"main": "./lib/index.js",
+	"author": {
+		"name": "David Kudera",
+		"email": "kudera.d@gmail.com",
+		"url": "https://www.davidkudera.com"
+	},
+	"peerDependencies": {
+		"@angular/common": "^5.0",
+		"@angular/core": "^5.0",
+		"@angular/forms": "^5.0",
+		"@angular/material": "^5.0",
+		"rxjs": "^5.5.0"
+	},
+	"devDependencies": {
+		"@angular/compiler": "^5.0",
+		"@angular/compiler-cli": "^5.0",
+		"@types/node": "8.0.19",
+		"ng-packagr": "^2.2.0",
+		"npm-install-peers": "^1.2.1",
+		"reflect-metadata": "^0.1.12",
+		"ts-node": "^5.0.1",
+		"tslint": "^5.9.1",
+		"typescript": "^2.7.2"
+	},
+	"scripts": {
+		"build": "ng-packagr -p ng-package.json",
+		"lint": "tslint --project tsconfig.json",
+		"install:peers": "npm-install-peers",
+		"publish:lib": "npm run build && npm publish lib --access=public"
+	}
+}

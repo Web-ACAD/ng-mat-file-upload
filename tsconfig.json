@@ -1,0 +1,22 @@
+{
+	"compilerOptions": {
+		"target": "es5",
+		"removeComments": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"declaration": true,
+		"outDir": "./lib",
+		"declarationDir": "./lib",
+		"allowSyntheticDefaultImports": true,
+		"lib": [
+			"es2016", "dom", "esnext.asynciterable"
+		]
+	},
+	"include": [
+		"./src"
+	],
+	"exclude": [
+		"./node_modules",
+		"./test"
+	]
+}

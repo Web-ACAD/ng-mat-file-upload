@@ -1,0 +1,6 @@
+<input #fileUpload type="file" (change)="onChange($event.target.files)" [multiple]="multiple" style="display: none;">
+
+<div>
+	<button mat-raised-button (click)="openDialog()" [color]="color" type="button"><ng-content></ng-content></button>
+	<span *ngIf="visibleValue !== ''" style="padding-left: 10px;">{{ visibleValue }}</span>
+</div>

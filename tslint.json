@@ -1,0 +1,115 @@
+{
+	"rules": {
+		"adjacent-overload-signatures": true,
+		"member-access": true,
+		"member-ordering": [
+			true,
+			{
+				"order": [
+					"public-static-field",
+					"protected-static-field",
+					"private-static-field",
+					"public-instance-field",
+					"protected-instance-field",
+					"private-instance-field",
+					"public-constructor",
+					"protected-constructor",
+					"private-constructor",
+					"public-static-method",
+					"protected-static-method",
+					"private-static-method",
+					"public-instance-method",
+					"protected-instance-method",
+					"private-instance-method"
+				]
+			}
+		],
+		"no-internal-module": true,
+		"no-namespace": true,
+		"no-non-null-assertion": true,
+		"no-unnecessary-type-assertion": true,
+		"typedef": [
+			true,
+			"call-signature",
+			"parameter",
+			"property-declaration",
+			"member-variable-declaration",
+			"object-destructuring",
+			"array-destructuring"
+		],
+		"typedef-whitespace": [
+			true,
+			{
+				"call-signature": "nospace",
+				"index-signature": "nospace",
+				"parameter": "nospace",
+				"property-declaration": "nospace",
+				"variable-declaration": "nospace"
+			}
+		],
+		"unified-signatures": true,
+		"curly": true,
+		"forin": true,
+		"label-position": true,
+		"no-arg": true,
+		"no-bitwise": true,
+		"no-conditional-assignment": true,
+		"no-console": true,
+		"no-construct": true,
+		"no-debugger": true,
+		"no-duplicate-super": true,
+		"no-duplicate-variable": true,
+		"no-eval": true,
+		"no-for-in-array": true,
+		"no-inferred-empty-object-type": true,
+		"no-invalid-this": true,
+		"no-misused-new": true,
+		"no-object-literal-type-assertion": true,
+		"no-shadowed-variable": true,
+		"no-sparse-arrays": true,
+		"no-string-throw": true,
+		"no-switch-case-fall-through": true,
+		"no-unsafe-finally": true,
+		"no-var-keyword": true,
+		"triple-equals": true,
+		"use-isnan": true,
+		"eofline": true,
+		"indent": [
+			true,
+			"tabs"
+		],
+		"linebreak-style": [
+			true,
+			"LF"
+		],
+		"no-mergeable-namespace": true,
+		"trailing-comma": [
+			true,
+			{
+				"multiline": "always",
+				"singleline": "never"
+			}
+		],
+		"array-type": [
+			true,
+			"generic"
+		],
+		"arrow-parens": true,
+		"arrow-return-shorthand": true,
+		"class-name": true,
+		"interface-over-type-literal": true,
+		"no-trailing-whitespace": true,
+		"number-literal-format": true,
+		"one-variable-per-declaration": true,
+		"quotemark": [
+			true,
+			"single",
+			"avoid-escape"
+		],
+		"semicolon": [
+			true,
+			"always",
+			"ignore-interfaces"
+		]
+	}
+}
