@@ -153,6 +153,7 @@ export class MatFileUploadComponent implements
 
 		this._onChange(files);
 		this.onTouched();
+		this.updateErrorState();
 	}
 
 
