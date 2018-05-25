@@ -1,7 +1,7 @@
 {
 	"name": "@webacad/ng-mat-file-upload",
 	"description": "File input for angular material",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"keywords": [
 		"angular",
 		"forms",
