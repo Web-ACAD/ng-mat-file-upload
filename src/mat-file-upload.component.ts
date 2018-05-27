@@ -8,7 +8,15 @@ import {Subject} from 'rxjs';
 let nextUniqueId: number = 0;
 
 
+export declare interface UploaderFile
+{
+	file: File,
+	progress: number,
+}
+
+
 @Component({
+	exportAs: 'waMatFileUpload',
 	selector: 'wa-mat-file-upload',
 	templateUrl: './mat-file-upload.component.html',
 	providers: [
@@ -52,9 +60,13 @@ export class MatFileUploadComponent implements
 
 	public readonly stateChanges: Subject<void> = new Subject<void>();
 
+	public _showUploader: boolean = false;
+
+	public _uploaderFiles: Array<UploaderFile> = [];
+
 	private _value: FileList|undefined;
 
-	private _disabled: boolean = false;
+	private _disabled: boolean;
 
 	private _id: string;
 
@@ -85,16 +97,20 @@ export class MatFileUploadComponent implements
 	@Input()
 	get disabled(): boolean
 	{
+		if (typeof this._disabled !== 'undefined') {
+			return this._disabled;
+		}
+
 		if (this.ngControl && this.ngControl.disabled !== null) {
 			return this.ngControl.disabled;
 		}
 
-		return this._disabled;
+		return false;
 	}
 
 	set disabled(disabled: boolean)
 	{
-		this._disabled = this.disabled;
+		this._disabled = disabled;
 	}
 
 
@@ -151,6 +167,14 @@ export class MatFileUploadComponent implements
 
 		this._value = files.length === 0 ? undefined : files;
 
+		this._uploaderFiles = [];
+		for (let i = 0; i < files.length; i++) {
+			this._uploaderFiles.push({
+				file: files[i],
+				progress: 0,
+			});
+		}
+
 		this._onChange(files);
 		this.onTouched();
 		this.updateErrorState();
@@ -199,6 +223,30 @@ export class MatFileUploadComponent implements
 			this.errorState = newState;
 			this.stateChanges.next();
 		}
+	}
+
+
+	public showUploader(): void
+	{
+		this._showUploader = true;
+	}
+
+
+	public hideUploader(): void
+	{
+		this._showUploader = false;
+	}
+
+
+	public increaseUploaderProgress(fileIndex: number, steps: number): void
+	{
+		this._uploaderFiles[fileIndex].progress += steps;
+	}
+
+
+	public setUploaderProgress(fileIndex: number, progress: number): void
+	{
+		this._uploaderFiles[fileIndex].progress = progress;
 	}
 
 
