@@ -1,0 +1,23 @@
+<mat-tab-group>
+	<mat-tab label="Simple">
+		<form [formGroup]="form" class="form-container">
+			<mat-form-field>
+				<wa-mat-file-upload formControlName="file" color="accent" placeholder="File">Choose file</wa-mat-file-upload>
+			</mat-form-field>
+		</form>
+	</mat-tab>
+	<mat-tab label="Uploader">
+		<form [formGroup]="form" class="form-container">
+			<mat-form-field>
+				<wa-mat-file-upload
+					formControlName="file"
+					[multiple]="true"
+					#uploader="waMatFileUpload"
+					(change)="startUploader(uploader)"
+					color="accent"
+					placeholder="File"
+				>Choose file</wa-mat-file-upload>
+			</mat-form-field>
+		</form>
+	</mat-tab>
+</mat-tab-group>

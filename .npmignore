@@ -1,5 +1,6 @@
 .idea/
 src/
+examples/
 .travis.yml
 tsconfig.json
 tslint.json
