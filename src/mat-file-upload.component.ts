@@ -55,7 +55,7 @@ export class MatFileUploadComponent implements
 
 	public readonly stateChanges: Subject<void> = new Subject<void>();
 
-	public _showUploader: boolean = false;
+	public _showPreview: boolean = false;
 
 	private _value: FileList|undefined;
 
@@ -224,15 +224,15 @@ export class MatFileUploadComponent implements
 	}
 
 
-	public showUploader(): void
+	public showPreview(): void
 	{
-		this._showUploader = true;
+		this._showPreview = true;
 	}
 
 
-	public hideUploader(): void
+	public hidePreview(): void
 	{
-		this._showUploader = false;
+		this._showPreview = false;
 	}
 
 

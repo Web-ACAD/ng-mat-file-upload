@@ -93,7 +93,7 @@ export class UploadComponent
             return;
         }
         
-        fileUpload.showUploader();
+        fileUpload.showPreview();
         
         const stepSize: number = 10;
         
@@ -102,7 +102,7 @@ export class UploadComponent
         }, () => {
             files[0].progress = 100;
             fileUpload.disabled = true;
-            fileUpload.hideUploader();
+            fileUpload.hidePreview();
         });
     }
     

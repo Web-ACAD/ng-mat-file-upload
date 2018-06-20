@@ -1,11 +1,11 @@
 <input #fileUpload type="file" (change)="onChange($event.target.files)" [multiple]="multiple" style="display: none;">
 
-<div *ngIf="!_showUploader">
+<div *ngIf="!_showPreview">
 	<button mat-raised-button (click)="openDialog()" [color]="color" [disabled]="disabled" type="button"><ng-content></ng-content></button>
 	<span *ngIf="visibleValue !== ''" style="padding-left: 10px;">{{ visibleValue }}</span>
 </div>
 
-<mat-list *ngIf="_showUploader">
+<mat-list *ngIf="_showPreview">
 	<ng-container *ngFor="let file of files; let isLast = last;">
 		<mat-list-item>
 			<mat-icon mat-list-icon>cloud_upload</mat-icon>
