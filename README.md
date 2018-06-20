@@ -29,6 +29,9 @@ $ yarna add rxjs
 $ yarna add @webacad/ng-mat-file-upload
 ```
 
+You will also need [@webacad/observable-file-reader](https://github.com/Web-ACAD/observable-file-reader) for image 
+previews.
+
 ## Register module
 
 **app.module.ts**

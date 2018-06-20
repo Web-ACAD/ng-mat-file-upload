@@ -8,8 +8,13 @@
 <mat-list *ngIf="preview && files.length">
 	<ng-container *ngFor="let file of files; let isLast = last;">
 		<mat-list-item>
-			<mat-icon mat-list-icon>{{ file.icon }}</mat-icon>
+			<img *ngIf="file.supportsImagePreview(); else listItemIcon" matListAvatar [src]="file.getImageSource() | async">
+			<ng-template #listItemIcon>
+				<mat-icon mat-list-icon>{{ file.icon }}</mat-icon>
+			</ng-template>
+
 			<h3 matLine>{{ file.file.name }}</h3>
+
 			<mat-progress-bar *ngIf="file.progress" matLine mode="determinate" [value]="file.progress"></mat-progress-bar>
 		</mat-list-item>
 		<mat-divider *ngIf="!isLast"></mat-divider>
