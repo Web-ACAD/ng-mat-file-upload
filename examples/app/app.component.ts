@@ -33,18 +33,18 @@ export class AppComponent
 		const files = fileUpload.files;
 
 		if (!files.length) {
-			fileUpload.hidePreview();
+			fileUpload.preview = false;
 			return;
 		}
 
-		fileUpload.showPreview();
+		fileUpload.preview = true;
 
 		const stepSize: number = 10;
 		let current: number = 0;
 
 		const interval = setInterval(() => {
 			if (current === 100) {
-				fileUpload.hidePreview();
+				fileUpload.preview = false;
 				fileUpload.disabled = true;
 				clearInterval(interval);
 				return;

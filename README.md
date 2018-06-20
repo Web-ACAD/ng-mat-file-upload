@@ -62,11 +62,11 @@ ordinary form control.
 
 It is also fully ready for material's `<mat-form-field>` component.
 
-## Uploader
+## Preview mode
 
-![uploader](./docs/uploader.png)
+![preview](./docs/preview.png)
 
-This component can be turned into the "uploader" mode which is useful eg for immediate upload on `change` event.
+Preview mode is mainly useful for uploading large files or showing selected images.
 
 **Example:**
 
@@ -74,6 +74,7 @@ This component can be turned into the "uploader" mode which is useful eg for imm
 <wa-mat-file-upload
     #fileUpload="waMatFileUpload"
     placeholder="File"
+    [multiple]="true"
     (change)="onFileChange(fileUpload)"
 >Choose file</wa-mat-file-upload>
 ```
@@ -89,11 +90,11 @@ export class UploadComponent
         const files = fileUpload.files;
         
         if (!files.length) {
-            fileUpload.hideUploader();
+            fileUpload.preview = false;
             return;
         }
         
-        fileUpload.showPreview();
+        fileUpload.preview = true;
         
         const stepSize: number = 10;
         
@@ -102,7 +103,7 @@ export class UploadComponent
         }, () => {
             files[0].progress = 100;
             fileUpload.disabled = true;
-            fileUpload.hidePreview();
+            fileUpload.preview = false;
         });
     }
     

@@ -44,6 +44,9 @@ export class MatFileUploadComponent implements
 	@Input()
 	public color: string|undefined;
 
+	@Input()
+	public preview: boolean = false;
+
 	@ViewChild('fileUpload')
 	public fileUpload: ElementRef;
 
@@ -54,8 +57,6 @@ export class MatFileUploadComponent implements
 	public shouldLabelFloat: boolean = true;
 
 	public readonly stateChanges: Subject<void> = new Subject<void>();
-
-	public _showPreview: boolean = false;
 
 	private _value: FileList|undefined;
 
@@ -221,18 +222,6 @@ export class MatFileUploadComponent implements
 			this.errorState = newState;
 			this.stateChanges.next();
 		}
-	}
-
-
-	public showPreview(): void
-	{
-		this._showPreview = true;
-	}
-
-
-	public hidePreview(): void
-	{
-		this._showPreview = false;
 	}
 
 
