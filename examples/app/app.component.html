@@ -55,4 +55,20 @@
 			<button mat-raised-button color="primary" type="submit">Save</button>
 		</form>
 	</mat-tab>
+
+	<mat-tab label="Preview on top">
+		<form [formGroup]="form" (ngSubmit)="save()" class="form-container">
+			<mat-form-field>
+				<wa-mat-file-upload
+					formControlName="fileUpload"
+					[multiple]="true"
+					[preview]="true"
+					previewPosition="top"
+					color="accent"
+					placeholder="File"
+				>Choose file</wa-mat-file-upload>
+			</mat-form-field>
+			<button mat-raised-button color="primary" type="submit">Save</button>
+		</form>
+	</mat-tab>
 </mat-tab-group>

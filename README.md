@@ -54,6 +54,7 @@ export class AppModule {}
 * `multiple` (boolean): allow to select multiple files
 * `dense` (boolean): show with smaller text sizes
 * `preview` (boolean): display selected files in preview box
+* `previewPosition` (top/bottom): position of preview box, default is `bottom`
 * `color` (string): change color of `mat-raised-button`
 
 ## Using in angular forms

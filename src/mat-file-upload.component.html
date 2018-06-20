@@ -1,3 +1,25 @@
+<ng-template #previewContainer>
+	<mat-list *ngIf="preview && files.length" [attr.dense]="dense ? 'dense' : null">
+		<ng-container *ngFor="let file of files; let isLast = last;">
+			<mat-list-item>
+				<img *ngIf="file.supportsImagePreview(); else listItemIcon" matListAvatar [src]="file.getImageSource() | async">
+				<ng-template #listItemIcon>
+					<mat-icon mat-list-icon>{{ file.icon }}</mat-icon>
+				</ng-template>
+
+				<h3 matLine>{{ file.file.name }}</h3>
+
+				<mat-progress-bar *ngIf="file.progress" matLine mode="determinate" [value]="file.progress"></mat-progress-bar>
+			</mat-list-item>
+			<mat-divider *ngIf="!isLast"></mat-divider>
+		</ng-container>
+	</mat-list>
+</ng-template>
+
+<ng-container *ngIf="previewPosition === 'top'">
+	<ng-container *ngTemplateOutlet="previewContainer"></ng-container>
+</ng-container>
+
 <input #fileUpload type="file" (change)="onChange($event.target.files)" [multiple]="multiple" style="display: none;">
 
 <div>
@@ -5,18 +27,6 @@
 	<span *ngIf="visibleValue !== ''" [ngClass]="{'mat-caption': dense}" style="padding-left: 10px;">{{ visibleValue }}</span>
 </div>
 
-<mat-list *ngIf="preview && files.length" [attr.dense]="dense ? 'dense' : null">
-	<ng-container *ngFor="let file of files; let isLast = last;">
-		<mat-list-item>
-			<img *ngIf="file.supportsImagePreview(); else listItemIcon" matListAvatar [src]="file.getImageSource() | async">
-			<ng-template #listItemIcon>
-				<mat-icon mat-list-icon>{{ file.icon }}</mat-icon>
-			</ng-template>
-
-			<h3 matLine>{{ file.file.name }}</h3>
-
-			<mat-progress-bar *ngIf="file.progress" matLine mode="determinate" [value]="file.progress"></mat-progress-bar>
-		</mat-list-item>
-		<mat-divider *ngIf="!isLast"></mat-divider>
-	</ng-container>
-</mat-list>
+<ng-container *ngIf="previewPosition === 'bottom'">
+	<ng-container *ngTemplateOutlet="previewContainer"></ng-container>
+</ng-container>

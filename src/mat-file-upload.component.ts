@@ -48,6 +48,9 @@ export class MatFileUploadComponent implements
 	public preview: boolean = false;
 
 	@Input()
+	public previewPosition: 'top' | 'bottom' = 'bottom';
+
+	@Input()
 	public dense: boolean = false;
 
 	@ViewChild('fileUpload')
