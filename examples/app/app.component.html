@@ -1,16 +1,17 @@
 <mat-tab-group>
 	<mat-tab label="Simple">
-		<form [formGroup]="form" class="form-container">
+		<form [formGroup]="form" (ngSubmit)="save()" class="form-container">
 			<mat-form-field>
-				<wa-mat-file-upload formControlName="file" color="accent" placeholder="File">Choose file</wa-mat-file-upload>
+				<wa-mat-file-upload formControlName="fileUpload" color="accent" placeholder="File">Choose file</wa-mat-file-upload>
 			</mat-form-field>
+			<button mat-raised-button color="primary" type="submit">Save</button>
 		</form>
 	</mat-tab>
 	<mat-tab label="Uploader">
-		<form [formGroup]="form" class="form-container">
+		<form [formGroup]="form" (ngSubmit)="save()" class="form-container">
 			<mat-form-field>
 				<wa-mat-file-upload
-					formControlName="file"
+					formControlName="fileUpload"
 					[multiple]="true"
 					#uploader="waMatFileUpload"
 					(change)="startUploader(uploader)"
@@ -18,6 +19,7 @@
 					placeholder="File"
 				>Choose file</wa-mat-file-upload>
 			</mat-form-field>
+			<button mat-raised-button color="primary" type="submit">Save</button>
 		</form>
 	</mat-tab>
 </mat-tab-group>

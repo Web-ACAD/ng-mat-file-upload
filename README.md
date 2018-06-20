@@ -86,7 +86,7 @@ export class UploadComponent
     
     public onFileChange(fileUpload: MatFileUploadComponent): void
     {
-        const files = fileUpload.value;
+        const files = fileUpload.files;
         
         if (!files.length) {
             fileUpload.hideUploader();
@@ -97,12 +97,12 @@ export class UploadComponent
         
         const stepSize: number = 10;
         
-        this.uploadFile(files[0], () => {
-            fileUpload.increaseUploaderProgress(0, stepSize);
+        this.uploadFile(files[0].file, () => {
+            files[0].increaseProgress(stepSize);
         }, () => {
-            fileUpload.setUploaderProgress(0, 100);
-            fileUpload.hideUploader();
+            files[0].progress = 100;
             fileUpload.disabled = true;
+            fileUpload.hideUploader();
         });
     }
     

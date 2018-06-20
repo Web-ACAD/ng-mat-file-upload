@@ -22,9 +22,15 @@ export class AppComponent
 	}
 
 
+	public save(): void
+	{
+		console.log(this.form.value.fileUpload);
+	}
+
+
 	public startUploader(fileUpload: MatFileUploadComponent): void
 	{
-		const files = fileUpload.value;
+		const files = fileUpload.files;
 
 		if (!files.length) {
 			fileUpload.hideUploader();
@@ -45,7 +51,7 @@ export class AppComponent
 			}
 
 			for (let i = 0; i < files.length; i++) {
-				fileUpload.increaseUploaderProgress(i, stepSize);
+				files[i].increaseProgress(stepSize);
 			}
 
 			current += stepSize;
@@ -56,7 +62,7 @@ export class AppComponent
 	private createForm(): void
 	{
 		this.form = this.$fb.group({
-			file: [null],
+			fileUpload: [null],
 		});
 	}
 

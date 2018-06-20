@@ -4,15 +4,10 @@ import {ErrorStateMatcher, CanUpdateErrorState} from '@angular/material/core';
 import {MatFormFieldControl} from '@angular/material/form-field';
 import {Subject} from 'rxjs';
 
+import {UploadFile} from './upload-file';
+
 
 let nextUniqueId: number = 0;
-
-
-export declare interface UploaderFile
-{
-	file: File,
-	progress: number,
-}
 
 
 @Component({
@@ -62,9 +57,9 @@ export class MatFileUploadComponent implements
 
 	public _showUploader: boolean = false;
 
-	public _uploaderFiles: Array<UploaderFile> = [];
-
 	private _value: FileList|undefined;
+
+	private _files: Array<UploadFile> = [];
 
 	private _disabled: boolean;
 
@@ -126,6 +121,12 @@ export class MatFileUploadComponent implements
 	}
 
 
+	get files(): Array<UploadFile>
+	{
+		return this._files;
+	}
+
+
 	get empty(): boolean
 	{
 		return typeof this._value === 'undefined';
@@ -157,25 +158,22 @@ export class MatFileUploadComponent implements
 
 	public onChange(files: FileList): void
 	{
-		if (files.length === 0) {
-			this.visibleValue = '';
-		} else if (files.length === 1) {
-			this.visibleValue = files[0].name;
-		} else {
-			this.visibleValue = files.length + ' Files selected';
-		}
-
 		this._value = files.length === 0 ? undefined : files;
+		this._files = [];
 
-		this._uploaderFiles = [];
 		for (let i = 0; i < files.length; i++) {
-			this._uploaderFiles.push({
-				file: files[i],
-				progress: 0,
-			});
+			this._files.push(new UploadFile(files[i]));
 		}
 
-		this._onChange(files);
+		if (this._value.length === 0) {
+			this.visibleValue = '';
+		} else if (this._value.length === 1) {
+			this.visibleValue = this._value[0].name;
+		} else {
+			this.visibleValue = this._value.length + ' Files selected';
+		}
+
+		this._onChange(this._value);
 		this.onTouched();
 		this.updateErrorState();
 	}
@@ -235,18 +233,6 @@ export class MatFileUploadComponent implements
 	public hideUploader(): void
 	{
 		this._showUploader = false;
-	}
-
-
-	public increaseUploaderProgress(fileIndex: number, steps: number): void
-	{
-		this._uploaderFiles[fileIndex].progress += steps;
-	}
-
-
-	public setUploaderProgress(fileIndex: number, progress: number): void
-	{
-		this._uploaderFiles[fileIndex].progress = progress;
 	}
 
 

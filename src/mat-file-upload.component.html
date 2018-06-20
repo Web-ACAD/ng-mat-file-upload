@@ -6,7 +6,7 @@
 </div>
 
 <mat-list *ngIf="_showUploader">
-	<ng-container *ngFor="let file of _uploaderFiles; let isLast = last;">
+	<ng-container *ngFor="let file of files; let isLast = last;">
 		<mat-list-item>
 			<mat-icon mat-list-icon>cloud_upload</mat-icon>
 			<h3 matLine>{{ file.file.name }}</h3>

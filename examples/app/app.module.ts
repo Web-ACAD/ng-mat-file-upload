@@ -5,6 +5,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatButtonModule} from '@angular/material/button';
 
 import {MatFileUploadModule} from '@webacad/ng-mat-file-upload';
 
@@ -16,7 +17,7 @@ import {AppComponent} from './app.component';
 		BrowserModule, BrowserAnimationsModule,
 		CommonModule,
 		ReactiveFormsModule,
-		MatFormFieldModule, MatTabsModule,
+		MatFormFieldModule, MatTabsModule, MatButtonModule,
 		MatFileUploadModule,
 	],
 	declarations: [
