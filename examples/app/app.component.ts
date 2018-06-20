@@ -39,14 +39,23 @@ export class AppComponent
 
 		fileUpload.preview = true;
 
+		const intervalTime: number = 750;
 		const stepSize: number = 10;
 		let current: number = 0;
 
 		const interval = setInterval(() => {
 			if (current === 100) {
-				fileUpload.preview = false;
-				fileUpload.disabled = true;
-				clearInterval(interval);
+				for (let i = 0; i < files.length; i++) {
+					files[i].progress = 0;
+					files[i].icon = 'check';
+				}
+
+				setTimeout(() => {
+					fileUpload.preview = false;
+					fileUpload.disabled = true;
+					clearInterval(interval);
+				}, intervalTime);
+
 				return;
 			}
 
@@ -55,7 +64,7 @@ export class AppComponent
 			}
 
 			current += stepSize;
-		}, 500);
+		}, intervalTime);
 	}
 
 

@@ -2,6 +2,9 @@ export class UploadFile
 {
 
 
+	public icon: string = 'cloud_upload';
+
+
 	constructor(
 		public readonly file: File,
 		private _progress: number = 0,
