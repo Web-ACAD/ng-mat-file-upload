@@ -10,27 +10,23 @@ File input for angular material
 ## Installation
 
 ```bash
-$ npm install --save @angular/common@^5.0
-$ npm install --save @angular/core@^5.0
-$ npm install --save @angular/forms@^5.0
-$ npm install --save @angular/material@^5.0
-$ npm install --save rxjs
 $ npm install --save @webacad/ng-mat-file-upload
 ```
 
 or with yarn
 
 ```bash
-$ yarna add @angular/common@^5.0
-$ yarna add @angular/core@^5.0
-$ yarna add @angular/forms@^5.0
-$ yarna add @angular/material@^5.0
-$ yarna add rxjs
 $ yarna add @webacad/ng-mat-file-upload
 ```
 
-You will also need [@webacad/observable-file-reader](https://github.com/Web-ACAD/observable-file-reader) for image 
-previews.
+**Dependencies:**
+
+* [@angular/common@^5.0](https://www.npmjs.com/package/@angular/common)
+* [@angular/core@^5.0](https://www.npmjs.com/package/@angular/core)
+* [@angular/forms@^5.0](https://www.npmjs.com/package/@angular/forms)
+* [@angular/material@^5.0](https://github.com/angular/material2/tree/5.2.5)
+* [rxjs^5.5.0](https://github.com/ReactiveX/rxjs/tree/5.5.11)
+* [@webacad/observable-file-reader](https://github.com/Web-ACAD/observable-file-reader)
 
 ## Register module
 
@@ -56,6 +52,8 @@ export class AppModule {}
 **Available options:**
 
 * `multiple` (boolean): allow to select multiple files
+* `dense` (boolean): show with smaller text sizes
+* `preview` (boolean): display selected files in preview box
 * `color` (string): change color of `mat-raised-button`
 
 ## Using in angular forms
@@ -65,11 +63,9 @@ ordinary form control.
 
 It is also fully ready for material's `<mat-form-field>` component.
 
-## Preview mode
+## Upload progress
 
-![preview](./docs/preview.png)
-
-Preview mode is mainly useful for uploading large files or showing selected images.
+![upload progress](./docs/upload-progress.png)
 
 **Example:**
 
@@ -77,7 +73,7 @@ Preview mode is mainly useful for uploading large files or showing selected imag
 <wa-mat-file-upload
     #fileUpload="waMatFileUpload"
     placeholder="File"
-    [multiple]="true"
+    [preview]="true"
     (change)="onFileChange(fileUpload)"
 >Choose file</wa-mat-file-upload>
 ```
@@ -93,11 +89,8 @@ export class UploadComponent
         const files = fileUpload.files;
         
         if (!files.length) {
-            fileUpload.preview = false;
             return;
         }
-        
-        fileUpload.preview = true;
         
         const stepSize: number = 10;
         
@@ -106,7 +99,6 @@ export class UploadComponent
         }, () => {
             files[0].progress = 100;
             fileUpload.disabled = true;
-            fileUpload.preview = false;
         });
     }
     
@@ -116,12 +108,4 @@ export class UploadComponent
     }
     
 }
-```
-
-## Dense mode
-
-Dense mode will show all texts in smaller variant.
-
-```html
-<wa-mat-file-upload [dense]="true">Choose file</wa-mat-file-upload>
 ```
