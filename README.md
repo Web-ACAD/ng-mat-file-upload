@@ -117,3 +117,11 @@ export class UploadComponent
     
 }
 ```
+
+## Dense mode
+
+Dense mode will show all texts in smaller variant.
+
+```html
+<wa-mat-file-upload [dense]="true">Choose file</wa-mat-file-upload>
+```

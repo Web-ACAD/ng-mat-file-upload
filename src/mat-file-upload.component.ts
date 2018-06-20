@@ -47,6 +47,9 @@ export class MatFileUploadComponent implements
 	@Input()
 	public preview: boolean = false;
 
+	@Input()
+	public dense: boolean = false;
+
 	@ViewChild('fileUpload')
 	public fileUpload: ElementRef;
 

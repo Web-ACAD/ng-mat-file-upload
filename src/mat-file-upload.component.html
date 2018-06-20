@@ -2,10 +2,10 @@
 
 <div>
 	<button mat-raised-button (click)="openDialog()" [color]="color" [disabled]="disabled" type="button"><ng-content></ng-content></button>
-	<span *ngIf="visibleValue !== ''" style="padding-left: 10px;">{{ visibleValue }}</span>
+	<span *ngIf="visibleValue !== ''" [ngClass]="{'mat-caption': dense}" style="padding-left: 10px;">{{ visibleValue }}</span>
 </div>
 
-<mat-list *ngIf="preview && files.length">
+<mat-list *ngIf="preview && files.length" [attr.dense]="dense ? 'dense' : null">
 	<ng-container *ngFor="let file of files; let isLast = last;">
 		<mat-list-item>
 			<img *ngIf="file.supportsImagePreview(); else listItemIcon" matListAvatar [src]="file.getImageSource() | async">
