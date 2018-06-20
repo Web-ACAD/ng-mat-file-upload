@@ -1,5 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
+import {ErrorStateMatcher} from '@angular/material/core';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
@@ -19,6 +20,9 @@ import {MatFileUploadComponent} from './mat-file-upload.component';
 	],
 	exports: [
 		MatFileUploadComponent,
+	],
+	providers: [
+		ErrorStateMatcher,
 	],
 })
 export class MatFileUploadModule {}
