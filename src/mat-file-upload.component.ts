@@ -164,6 +164,14 @@ export class MatFileUploadComponent extends _BaseMatFileUploadComponentMixin imp
 	}
 
 
+	public clearFiles(): void
+	{
+		this._value = [];
+		this._files = [];
+		this.recalculate();
+	}
+
+
 	public ngOnDestroy(): void
 	{
 		this.stateChanges.complete();
@@ -183,17 +191,7 @@ export class MatFileUploadComponent extends _BaseMatFileUploadComponentMixin imp
 			this._files.push(new UploadFile(files[i]));
 		}
 
-		if (this._value.length === 0) {
-			this.visibleValue = '';
-		} else if (this._value.length === 1) {
-			this.visibleValue = this._value[0].name;
-		} else {
-			this.visibleValue = this._value.length + ' Files selected';
-		}
-
-		this._onChange(this._value);
-		this.onTouched();
-		this.updateErrorState();
+		this.recalculate();
 	}
 
 
@@ -228,5 +226,21 @@ export class MatFileUploadComponent extends _BaseMatFileUploadComponentMixin imp
 
 
 	private _onChange = (_: any) => {};
+
+
+	private recalculate(): void
+	{
+		if (this._value.length === 0) {
+			this.visibleValue = '';
+		} else if (this._value.length === 1) {
+			this.visibleValue = this._value[0].name;
+		} else {
+			this.visibleValue = this._value.length + ' Files selected';
+		}
+
+		this._onChange(this._value);
+		this.onTouched();
+		this.updateErrorState();
+	}
 
 }
