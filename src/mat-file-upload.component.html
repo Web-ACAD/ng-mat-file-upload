@@ -10,6 +10,10 @@
 				<h3 matLine>{{ file.file.name }}</h3>
 
 				<mat-progress-bar *ngIf="file.progress" matLine mode="determinate" [value]="file.progress"></mat-progress-bar>
+
+				<button *ngIf="!disabled && file.progress === 0" mat-icon-button (click)="removeFile(file)" type="button">
+					<mat-icon>close</mat-icon>
+				</button>
 			</mat-list-item>
 			<mat-divider *ngIf="!isLast"></mat-divider>
 		</ng-container>

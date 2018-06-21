@@ -172,6 +172,14 @@ export class MatFileUploadComponent extends _BaseMatFileUploadComponentMixin imp
 	}
 
 
+	public removeFile(file: UploadFile): void
+	{
+		this._value.splice(this._value.indexOf(file.file), 1);
+		this._files.splice(this._files.indexOf(file), 1);
+		this.recalculate();
+	}
+
+
 	public ngOnDestroy(): void
 	{
 		this.stateChanges.complete();
