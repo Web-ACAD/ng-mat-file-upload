@@ -1,7 +1,10 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
-import {MatFileUploadComponent} from '@webacad/ng-mat-file-upload';
+import {MatFileUploadComponent, fileType, fileMaxSize} from '@webacad/ng-mat-file-upload';
+
+
+const FORM_LIST: Array<string> = ['Simple', 'Validation', 'Uploader', 'Preview', 'Dense', 'PreviewOnTop'];
 
 
 @Component({
@@ -12,19 +15,29 @@ export class AppComponent
 {
 
 
-	public form: FormGroup;
+	public formSimple: FormGroup;
+
+	public formValidation: FormGroup;
+
+	public formUploader: FormGroup;
+
+	public formPreview: FormGroup;
+
+	public formDense: FormGroup;
+
+	public formPreviewOnTop: FormGroup;
 
 
 	constructor(
 		private $fb: FormBuilder,
 	) {
-		this.createForm();
+		this.createForms();
 	}
 
 
-	public save(): void
+	public save(form: FormGroup): void
 	{
-		console.log(this.form.value.fileUpload);
+		console.log(form.value.fileUpload);
 	}
 
 
@@ -68,11 +81,22 @@ export class AppComponent
 	}
 
 
-	private createForm(): void
+	private createForms(): void
 	{
-		this.form = this.$fb.group({
-			fileUpload: [null],
-		});
+		for (let variant of FORM_LIST) {
+			let fileUpload: Array<any> = [null];
+
+			if (variant === 'Validation') {
+				fileUpload = [null, [
+					fileType(['image/gif', 'image/png', 'image/jpeg',]),
+					fileMaxSize(1 * 1024 * 1024),
+				]];
+			}
+
+			this['form' + variant] = this.$fb.group({
+				fileUpload: fileUpload,
+			});
+		}
 	}
 
 }

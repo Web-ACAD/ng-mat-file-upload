@@ -1,7 +1,7 @@
 <mat-tab-group>
 
 	<mat-tab label="Simple">
-		<form [formGroup]="form" (ngSubmit)="save()" class="form-container">
+		<form [formGroup]="formSimple" (ngSubmit)="save(formSimple)" class="form-container">
 			<mat-form-field>
 				<wa-mat-file-upload formControlName="fileUpload" color="accent" placeholder="File">Choose file</wa-mat-file-upload>
 			</mat-form-field>
@@ -9,8 +9,19 @@
 		</form>
 	</mat-tab>
 
+	<mat-tab label="Validation">
+		<form [formGroup]="formValidation" (ngSubmit)="save(formValidation)" class="form-container">
+			<mat-form-field>
+				<wa-mat-file-upload formControlName="fileUpload" color="accent" placeholder="File">Choose file</wa-mat-file-upload>
+				<mat-error *ngIf="formValidation.hasError('fileMaxSize', ['fileUpload'])">Maximum size of file is 1MB</mat-error>
+				<mat-error *ngIf="formValidation.hasError('fileType', ['fileUpload'])">Only images are allowed</mat-error>
+			</mat-form-field>
+			<button mat-raised-button color="primary" type="submit">Save</button>
+		</form>
+	</mat-tab>
+
 	<mat-tab label="Uploader">
-		<form [formGroup]="form" (ngSubmit)="save()" class="form-container">
+		<form [formGroup]="formUploader" (ngSubmit)="save(formUploader)" class="form-container">
 			<mat-form-field>
 				<wa-mat-file-upload
 					formControlName="fileUpload"
@@ -26,7 +37,7 @@
 	</mat-tab>
 
 	<mat-tab label="Preview">
-		<form [formGroup]="form" (ngSubmit)="save()" class="form-container">
+		<form [formGroup]="formPreview" (ngSubmit)="save(formPreview)" class="form-container">
 			<mat-form-field>
 				<wa-mat-file-upload
 					formControlName="fileUpload"
@@ -41,7 +52,7 @@
 	</mat-tab>
 
 	<mat-tab label="Dense">
-		<form [formGroup]="form" (ngSubmit)="save()" class="form-container">
+		<form [formGroup]="formDense" (ngSubmit)="save(formDense)" class="form-container">
 			<mat-form-field>
 				<wa-mat-file-upload
 					formControlName="fileUpload"
@@ -57,7 +68,7 @@
 	</mat-tab>
 
 	<mat-tab label="Preview on top">
-		<form [formGroup]="form" (ngSubmit)="save()" class="form-container">
+		<form [formGroup]="formPreviewOnTop" (ngSubmit)="save(formPreviewOnTop)" class="form-container">
 			<mat-form-field>
 				<wa-mat-file-upload
 					formControlName="fileUpload"
