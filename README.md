@@ -115,5 +115,5 @@ export class UploadComponent
 
 There are some build in form validators which you can use out of the box.
 
-* `fileMaxSize` (number): Maximum size of file(s)
-* `fileType` (string[]): List of allowed mime types
+* `fileMaxSize(number)`: Maximum size of file(s)
+* `fileType(string[])`: List of allowed mime types
