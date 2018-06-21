@@ -1,13 +1,29 @@
 import {Component, Input, Optional, Self, OnDestroy, ViewChild, ElementRef} from '@angular/core';
-import {ControlValueAccessor, NgForm, FormGroupDirective, NgControl, FormControl} from '@angular/forms';
-import {ErrorStateMatcher, CanUpdateErrorState} from '@angular/material/core';
+import {ControlValueAccessor, NgForm, FormGroupDirective, NgControl} from '@angular/forms';
+import {ErrorStateMatcher, CanUpdateErrorState, mixinErrorState} from '@angular/material/core';
 import {MatFormFieldControl} from '@angular/material/form-field';
-import {Subject} from 'rxjs';
 
 import {UploadFile} from './upload-file';
 
 
 let nextUniqueId: number = 0;
+
+
+export class BaseMatFileUploadComponent
+{
+
+
+	constructor(
+		public _defaultErrorStateMatcher: ErrorStateMatcher,
+		public _parentForm: NgForm,
+		public _parentFormGroup: FormGroupDirective,
+		public ngControl: NgControl,
+	) {}
+
+}
+
+
+export const _BaseMatFileUploadComponentMixin = mixinErrorState(BaseMatFileUploadComponent);
 
 
 @Component({
@@ -21,11 +37,10 @@ let nextUniqueId: number = 0;
 		},
 	],
 })
-export class MatFileUploadComponent implements
+export class MatFileUploadComponent extends _BaseMatFileUploadComponentMixin implements
 	OnDestroy,
 	ControlValueAccessor,
-	MatFormFieldControl<FileList>,
-	CanUpdateErrorState
+	MatFormFieldControl<FileList>
 {
 
 
@@ -34,9 +49,6 @@ export class MatFileUploadComponent implements
 
 	@Input()
 	public required: boolean = false;
-
-	@Input()
-	public errorStateMatcher: ErrorStateMatcher;
 
 	@Input()
 	public multiple: boolean = false;
@@ -58,11 +70,7 @@ export class MatFileUploadComponent implements
 
 	public visibleValue: string = '';
 
-	public errorState: boolean = false;
-
 	public shouldLabelFloat: boolean = true;
-
-	public readonly stateChanges: Subject<void> = new Subject<void>();
 
 	private _value: FileList|undefined;
 
@@ -76,11 +84,13 @@ export class MatFileUploadComponent implements
 
 
 	constructor(
-		private _defaultErrorStateMatcher: ErrorStateMatcher,
-		@Optional() private _parentForm: NgForm,
-		@Optional() private _parentFormGroup: FormGroupDirective,
+		defaultErrorStateMatcher: ErrorStateMatcher,
+		@Optional() parentForm: NgForm,
+		@Optional() parentFormGroup: FormGroupDirective,
 		@Self() @Optional() public readonly ngControl: NgControl,
 	) {
+		super(defaultErrorStateMatcher, parentForm, parentFormGroup, ngControl);
+
 		if (this.ngControl !== null) {
 			this.ngControl.valueAccessor = this;
 		}
@@ -214,21 +224,6 @@ export class MatFileUploadComponent implements
 
 
 	public setDescribedByIds(): void {}
-
-
-	public updateErrorState(): void
-	{
-		const oldState = this.errorState;
-		const parent = this._parentFormGroup || this._parentForm;
-		const matcher = this.errorStateMatcher || this._defaultErrorStateMatcher;
-		const control = this.ngControl ? <FormControl>this.ngControl.control : null;
-		const newState = matcher.isErrorState(control, parent);
-
-		if (newState !== oldState) {
-			this.errorState = newState;
-			this.stateChanges.next();
-		}
-	}
 
 
 	private _onChange = (_: any) => {};
