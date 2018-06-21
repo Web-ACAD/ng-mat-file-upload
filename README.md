@@ -56,6 +56,7 @@ export class AppModule {}
 * `preview` (boolean): display selected files in preview box
 * `previewPosition` (top/bottom): position of preview box, default is `bottom`
 * `color` (string): change color of `mat-raised-button`
+* `selectedText` (function): custom selected text translation function
 
 ## Using in angular forms
 
@@ -117,3 +118,49 @@ There are some build in form validators which you can use out of the box.
 
 * `fileMaxSize(number)`: Maximum size of file(s)
 * `fileType(string[])`: List of allowed mime types
+
+## Internationalization
+
+There is only one text in this component which should be translated for better international support. It is the selected 
+preview text next to dialog button.
+
+**Default form:**
+
+* no file selected: empty string
+* 1 file selected: name of selected file
+* more than 1 file selected: `files.length + " Files selected"`
+
+Custom value can be provided via `selectedText` input. 
+
+First create translating method:
+
+```typescript
+import {UploadFile} from '@webacad/ng-mat-file-upload';
+
+class MyComponent
+{
+    
+    public translateValue(files: Array<UploadFile>): string
+    {
+        if (!files.length) {
+            return '';
+        }
+        
+        if (files.length === 1) {
+            return '1 file';
+        }
+        
+        return `${files.length} files`;
+    }
+    
+}
+```
+
+Now pass your `translateValue` method into the `selectedText` input:
+
+```html
+<wa-mat-file-upload
+    placeholder="File"
+    [selectedText]="translateValue"
+>Choose file</wa-mat-file-upload>
+```

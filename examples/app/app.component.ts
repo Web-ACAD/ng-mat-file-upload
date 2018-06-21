@@ -1,10 +1,12 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
-import {MatFileUploadComponent, fileType, fileMaxSize} from '@webacad/ng-mat-file-upload';
+import {MatFileUploadComponent, UploadFile, fileType, fileMaxSize} from '@webacad/ng-mat-file-upload';
 
 
-const FORM_LIST: Array<string> = ['Simple', 'Validation', 'Uploader', 'Preview', 'Dense', 'PreviewOnTop'];
+const FORM_LIST: Array<string> = [
+	'Simple', 'Validation', 'Uploader', 'Preview', 'Dense', 'PreviewOnTop', 'Internationalization'
+];
 
 
 @Component({
@@ -26,6 +28,8 @@ export class AppComponent
 	public formDense: FormGroup;
 
 	public formPreviewOnTop: FormGroup;
+
+	public formInternationalization: FormGroup;
 
 
 	constructor(
@@ -74,6 +78,24 @@ export class AppComponent
 
 			current += stepSize;
 		}, intervalTime);
+	}
+
+
+	public czechSelectedText(files: Array<UploadFile>): string
+	{
+		if (files.length === 0) {
+			return 'Žádný soubor';
+		}
+
+		if (files.length === 1) {
+			return `1 soubor: ${files[0].file.name}`
+		}
+
+		if (files.length < 5) {
+			return `${files.length} soubory`;
+		}
+
+		return `${files.length} souborů`;
 	}
 
 

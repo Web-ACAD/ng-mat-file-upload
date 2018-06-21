@@ -28,9 +28,9 @@
 
 <div>
 	<button mat-raised-button (click)="openDialog()" [color]="color" [disabled]="disabled" type="button"><ng-content></ng-content></button>
-	<span *ngIf="visibleValue !== ''" [ngClass]="{'mat-caption': dense}" style="padding-left: 10px;">
+	<span [ngClass]="{'mat-caption': dense}" style="padding-left: 10px;">
 		{{ visibleValue }}
-		<button *ngIf="!disabled" mat-icon-button (click)="clearFiles()" type="button">
+		<button *ngIf="!disabled && files.length" mat-icon-button (click)="clearFiles()" type="button">
 			<mat-icon>close</mat-icon>
 		</button>
 	</span>

@@ -1,4 +1,4 @@
-import {Component, Input, Optional, Self, OnDestroy, ViewChild, ElementRef} from '@angular/core';
+import {Component, Input, Optional, Self, OnInit, OnDestroy, ViewChild, ElementRef} from '@angular/core';
 import {ControlValueAccessor, NgForm, FormGroupDirective, NgControl} from '@angular/forms';
 import {ErrorStateMatcher, CanUpdateErrorState, mixinErrorState} from '@angular/material/core';
 import {MatFormFieldControl} from '@angular/material/form-field';
@@ -38,6 +38,7 @@ export const _BaseMatFileUploadComponentMixin = mixinErrorState(BaseMatFileUploa
 	],
 })
 export class MatFileUploadComponent extends _BaseMatFileUploadComponentMixin implements
+	OnInit,
 	OnDestroy,
 	ControlValueAccessor,
 	MatFormFieldControl<Array<File>>
@@ -64,6 +65,9 @@ export class MatFileUploadComponent extends _BaseMatFileUploadComponentMixin imp
 
 	@Input()
 	public dense: boolean = false;
+
+	@Input()
+	public selectedText: (files: Array<UploadFile>) => string = defaultSelectedText;
 
 	@ViewChild('fileUpload')
 	public fileUpload: ElementRef;
@@ -180,6 +184,12 @@ export class MatFileUploadComponent extends _BaseMatFileUploadComponentMixin imp
 	}
 
 
+	public ngOnInit(): void
+	{
+		this.visibleValue = this.selectedText(this._files);
+	}
+
+
 	public ngOnDestroy(): void
 	{
 		this.stateChanges.complete();
@@ -238,17 +248,25 @@ export class MatFileUploadComponent extends _BaseMatFileUploadComponentMixin imp
 
 	private recalculate(): void
 	{
-		if (this._value.length === 0) {
-			this.visibleValue = '';
-		} else if (this._value.length === 1) {
-			this.visibleValue = this._value[0].name;
-		} else {
-			this.visibleValue = this._value.length + ' Files selected';
-		}
+		this.visibleValue = this.selectedText(this._files);
 
 		this._onChange(this._value);
 		this.onTouched();
 		this.updateErrorState();
 	}
 
+}
+
+
+function defaultSelectedText(files: Array<UploadFile>): string
+{
+	if (files.length === 0) {
+		return '';
+	}
+
+	if (files.length === 1) {
+		return files[0].file.name;
+	}
+
+	return files.length + ' Files selected';
 }
