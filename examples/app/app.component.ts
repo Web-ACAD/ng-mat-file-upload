@@ -46,11 +46,8 @@ export class AppComponent
 		const files = fileUpload.files;
 
 		if (!files.length) {
-			fileUpload.preview = false;
 			return;
 		}
-
-		fileUpload.preview = true;
 
 		const intervalTime: number = 750;
 		const stepSize: number = 10;
@@ -64,7 +61,6 @@ export class AppComponent
 				}
 
 				setTimeout(() => {
-					fileUpload.preview = false;
 					fileUpload.disabled = true;
 					clearInterval(interval);
 				}, intervalTime);

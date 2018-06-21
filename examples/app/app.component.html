@@ -26,6 +26,7 @@
 				<wa-mat-file-upload
 					formControlName="fileUpload"
 					[multiple]="true"
+					[preview]="true"
 					#uploader="waMatFileUpload"
 					(change)="startUploader(uploader)"
 					color="accent"
