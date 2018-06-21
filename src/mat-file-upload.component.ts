@@ -40,7 +40,7 @@ export const _BaseMatFileUploadComponentMixin = mixinErrorState(BaseMatFileUploa
 export class MatFileUploadComponent extends _BaseMatFileUploadComponentMixin implements
 	OnDestroy,
 	ControlValueAccessor,
-	MatFormFieldControl<FileList>
+	MatFormFieldControl<Array<File>>
 {
 
 
@@ -72,7 +72,7 @@ export class MatFileUploadComponent extends _BaseMatFileUploadComponentMixin imp
 
 	public shouldLabelFloat: boolean = true;
 
-	private _value: FileList|undefined;
+	private _value: Array<File>;
 
 	private _files: Array<UploadFile> = [];
 
@@ -98,12 +98,12 @@ export class MatFileUploadComponent extends _BaseMatFileUploadComponentMixin imp
 
 
 	@Input()
-	get value(): FileList
+	get value(): Array<File>
 	{
 		return this._value;
 	}
 
-	set value(value: FileList) {}
+	set value(value: Array<File>) {}
 
 
 	@Input()
@@ -175,10 +175,11 @@ export class MatFileUploadComponent extends _BaseMatFileUploadComponentMixin imp
 
 	public onChange(files: FileList): void
 	{
-		this._value = files.length === 0 ? undefined : files;
+		this._value = [];
 		this._files = [];
 
 		for (let i = 0; i < files.length; i++) {
+			this._value.push(files[i]);
 			this._files.push(new UploadFile(files[i]));
 		}
 
