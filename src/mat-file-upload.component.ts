@@ -248,6 +248,7 @@ export class MatFileUploadComponent extends _BaseMatFileUploadComponentMixin imp
 
 	private recalculate(): void
 	{
+		this.fileUpload.nativeElement.value = '';
 		this.visibleValue = this.selectedText(this._files);
 
 		this._onChange(this._value);
