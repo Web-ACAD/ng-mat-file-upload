@@ -7,6 +7,18 @@ File input for angular material
 
 ![default style](./docs/default.png)
 
+## Dependencies
+
+* `@angular/animations`
+* `@angular/cdk`
+* `@angular/common`
+* `@angular/core`
+* `@angular/forms`
+* `@angular/material`
+* `@angular/platform-browser`
+* `@webacad/observable-file-reader`
+* `rxjs`
+
 ## Installation
 
 ```bash
@@ -18,15 +30,6 @@ or with yarn
 ```bash
 $ yarna add @webacad/ng-mat-file-upload
 ```
-
-**Dependencies:**
-
-* [@angular/common@^5.0](https://www.npmjs.com/package/@angular/common)
-* [@angular/core@^5.0](https://www.npmjs.com/package/@angular/core)
-* [@angular/forms@^5.0](https://www.npmjs.com/package/@angular/forms)
-* [@angular/material@^5.0](https://github.com/angular/material2/tree/5.2.5)
-* [rxjs^5.5.0](https://github.com/ReactiveX/rxjs/tree/5.5.11)
-* [@webacad/observable-file-reader](https://github.com/Web-ACAD/observable-file-reader)
 
 ## Register module
 

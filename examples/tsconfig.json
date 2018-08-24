@@ -1,16 +1,16 @@
 {
 	"compileOnSave": false,
 	"compilerOptions": {
-		"target": "es5",
-		"rootDir": ".",
-		"baseUrl": ".",
-		"removeComments": true,
+		"sourceMap": true,
+		"declaration": false,
+		"moduleResolution": "node",
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
-		"sourceMap": true,
+		"target": "es5",
 		"lib": [
-			"es2016", "dom", "esnext.asynciterable"
-		]
+			"es2017", "dom"
+		],
+		"baseUrl": "."
 	},
 	"exclude": [
 		"./node_modules"

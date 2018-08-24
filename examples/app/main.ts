@@ -1,13 +1,17 @@
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {hmrBootstrap} from '@webacad/angular-tools/hmr';
 
+import {hmrBootstrap} from './hmr';
 import {AppModule} from './app.module';
 
 
-Error['stackTraceLimit'] = Infinity;
-require('zone.js/dist/long-stack-trace-zone');
+require('zone.js/dist/zone-error');
 
 
-hmrBootstrap(module, () => {
-	return platformBrowserDynamic().bootstrapModule(AppModule);
-});
+const bootstrap = () => {
+	return platformBrowserDynamic()
+		.bootstrapModule(AppModule)
+		.catch((err) => console.log(err));
+};
+
+
+hmrBootstrap(module, bootstrap);

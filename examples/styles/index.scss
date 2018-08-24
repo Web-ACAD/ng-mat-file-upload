@@ -1,10 +1,10 @@
-@import "~@angular/material/theming";
+@import '~@angular/material/theming';
 
 @include mat-core();
 
-$default-theme-primary: mat-palette($mat-indigo, 600);
-$default-theme-accent: mat-palette($mat-pink, A400);
-$default-theme-warn: mat-palette($mat-yellow, A700);
+$default-theme-primary: mat-palette($mat-indigo);
+$default-theme-accent: mat-palette($mat-pink, A200, A100, A400);
+$default-theme-warn: mat-palette($mat-red);
 
 $default-theme: mat-light-theme(
 	$default-theme-primary,

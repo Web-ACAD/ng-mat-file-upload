@@ -1,17 +1,19 @@
-import {Component} from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
 import {MatFileUploadComponent, UploadFile, fileType, fileMaxSize} from '@webacad/ng-mat-file-upload';
 
 
 const FORM_LIST: Array<string> = [
-	'Simple', 'Validation', 'Uploader', 'Preview', 'Dense', 'PreviewOnTop', 'Internationalization'
+	'Simple', 'Validation', 'Uploader', 'Preview', 'Dense', 'PreviewOnTop', 'Internationalization',
 ];
 
 
 @Component({
 	selector: 'wa-example-app',
 	templateUrl: './app.component.html',
+	styleUrls: ['../styles/index.scss'],
+	encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent
 {
@@ -88,7 +90,7 @@ export class AppComponent
 		}
 
 		if (files.length === 1) {
-			return `1 soubor: ${files[0].file.name}`
+			return `1 soubor: ${files[0].file.name}`;
 		}
 
 		if (files.length < 5) {
